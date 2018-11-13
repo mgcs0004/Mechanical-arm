@@ -30,17 +30,17 @@ void loop() {
 
   // print data
   // turn data
-  if (v3 < 340) a1 = a1 + a;  //如果電壓值大於340，馬達角度增加
-  if (v3 > 680) a1 = a1 - a;
+  if (v3 < 340) a1 = a1 + 2a;  //如果電壓值大於340，馬達角度增加
+  if (v3 > 680) a1 = a1 - 2a; //讓a為2倍可以動得更順
   s1.write(a1); // write (i)將 i 的值寫入s1馬達中
-  if (v2 < 340) a2 = a2 - a;
-  if (v2 > 680) a2 = a2 + a;
+  if (v2 < 340) a2 = a2 - 2a;
+  if (v2 > 680) a2 = a2 + 2a;
   s2.write(a2);
-  if (v1 < 340) a3 = a3 - a;
-  if (v1 > 680) a3 = a3 + a;
+  if (v1 < 340) a3 = a3 - 2a;
+  if (v1 > 680) a3 = a3 + 2a;
   s3.write(a3);
-  if (v0 < 340) a4 = a4 - a;
-  if (v0 > 680) a4 = a4 + a;
+  if (v0 < 340) a4 = a4 - 2a;
+  if (v0 > 680) a4 = a4 + 2a;
   s4.write(a4);
   delay(100);
 }
