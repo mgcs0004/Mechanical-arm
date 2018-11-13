@@ -1,0 +1,46 @@
+#include <Servo.h>
+Servo s1,s2,s3,s4;
+int b1,b2;
+int v0,v1,v2,v3;
+int a,a1,a2,a3,a4;
+
+void setup() {
+  Serial.begin(9600);
+  s1.attach(2); //attach(i) 設定腳位i來控制馬達
+  s2.attach(3);
+  s3.attach(4);
+  s4.attach(5);
+  pinMode(6, INPUT_PULLUP); //pinMode 設定端口為接收還是輸出
+  pinMode(7, INPUT_PULLUP);
+  a=2;
+  a1=90; //設定馬達初始角度為90
+  a2=90;
+  a3=120;
+  a4=90;
+}
+
+void loop() {
+  // get data
+  b1 = digitalRead(6);  //digitalRead()讀取引腳電平狀態，建議配pinMode()
+  v0 = analogRead(A0);  //analogRead(i)讀取i腳位的類比輸入(電壓值)
+  v1 = analogRead(A1);
+  b2 = digitalRead(7);
+  v2 = analogRead(A2);
+  v3 = analogRead(A3);
+
+  // print data
+  // turn data
+  if (v3 < 340) a1 = a1 + a;  //如果電壓值大於340，馬達角度增加
+  if (v3 > 680) a1 = a1 - a;
+  s1.write(a1); // write (i)將 i 的值寫入s1馬達中
+  if (v2 < 340) a2 = a2 - a;
+  if (v2 > 680) a2 = a2 + a;
+  s2.write(a2);
+  if (v1 < 340) a3 = a3 - a;
+  if (v1 > 680) a3 = a3 + a;
+  s3.write(a3);
+  if (v0 < 340) a4 = a4 - a;
+  if (v0 > 680) a4 = a4 + a;
+  s4.write(a4);
+  delay(100);
+}
